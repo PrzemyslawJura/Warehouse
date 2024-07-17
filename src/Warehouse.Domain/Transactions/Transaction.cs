@@ -12,7 +12,12 @@ public class Transaction
 
     public Product Products { get; set; }
     public WarehouseRack WarehousesRack { get; set; }
-    public Worker Worker { get; set; }
+    public Worker Workers { get; set; }
+
+    public Guid ProductId { get; set; }
+    public Guid WarehouseRackId { get; set; }
+    public Guid WorkerId { get; set; }
+
 
     public Transaction(
         int quantity,

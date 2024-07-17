@@ -10,7 +10,9 @@ public class WarehouseRack
     public int Quantity { get; set; }
 
     public ICollection<Transaction>? Transactions { get; private set; }
-    public WarehouseSize WarehouseSize { get; set; }
+    public WarehouseSize WarehousesSize { get; set; }
+
+    public Guid WarehouseSizeId { get; set; }
 
     public WarehouseRack(
         string sector,

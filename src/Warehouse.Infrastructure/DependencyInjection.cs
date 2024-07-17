@@ -1,6 +1,4 @@
 ﻿namespace Warehouse.Infrastructure;
-
-public class Class1
+internal class DependencyInjection
 {
-
 }
