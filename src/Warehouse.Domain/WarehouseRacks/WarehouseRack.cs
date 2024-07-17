@@ -4,7 +4,7 @@ using Warehouse.Domain.WarehousesSize;
 namespace Warehouse.Domain.Warehouses;
 public class WarehouseRack
 {
-    Guid Id { get; set; }
+    public Guid Id { get; set; }
     public string Sector { get; set; }
     public string Rack { get; set; }
     public int Quantity { get; set; }

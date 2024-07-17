@@ -5,5 +5,11 @@ using Warehouse.Domain.WarehousesSize;
 namespace Warehouse.Infrastructure.Products;
 public class WarehouseSizeConfigurations : IEntityTypeConfiguration<WarehouseSize>
 {
-    public void Configure(EntityTypeBuilder<WarehouseSize> builder) { }
+    public void Configure(EntityTypeBuilder<WarehouseSize> builder)
+    {
+        builder.HasKey(x => x.Id);
+
+        builder.Property(x => x.Id)
+            .ValueGeneratedNever();
+    }
 }

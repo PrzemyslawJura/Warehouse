@@ -3,7 +3,7 @@
 namespace Warehouse.Domain.WarehousesSize;
 public class WarehouseSize
 {
-    Guid Id { get; set; }
+    public Guid Id { get; set; }
     public int SectorNumber { get; set; }
     public int RackQuantity { get; set; }
 

@@ -3,7 +3,7 @@
 namespace Warehouse.Domain.Workers;
 public class Worker
 {
-    Guid Id { get; set; }
+    public Guid Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public WorkerRole Role { get; set; }

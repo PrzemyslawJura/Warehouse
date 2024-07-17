@@ -7,6 +7,11 @@ public class WarehouseRackConfigurations : IEntityTypeConfiguration<WarehouseRac
 {
     public void Configure(EntityTypeBuilder<WarehouseRack> builder)
     {
+        builder.HasKey(x => x.Id);
+
+        builder.Property(x => x.Id)
+            .ValueGeneratedNever();
+
         builder.HasOne(x => x.WarehousesSize)
             .WithMany(x => x.WarehousesRack)
             .HasForeignKey(x => x.WarehouseSizeId);

@@ -7,6 +7,14 @@ public class TransactionConfigurations : IEntityTypeConfiguration<Transaction>
 {
     public void Configure(EntityTypeBuilder<Transaction> builder)
     {
+        builder.HasKey(x => x.Id);
+
+        builder.Property(x => x.Id)
+            .ValueGeneratedNever();
+
+        builder.Property(x => x.Type)
+            .HasConversion<string>();
+
         builder.HasOne(x => x.Products)
               .WithMany(x => x.Transactions)
               .HasForeignKey(x => x.ProductId);
