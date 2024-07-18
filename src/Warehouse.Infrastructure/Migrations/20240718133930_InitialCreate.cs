@@ -30,6 +30,7 @@ namespace Warehouse.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     SectorNumber = table.Column<int>(type: "int", nullable: false),
                     RackQuantity = table.Column<int>(type: "int", nullable: false)
                 },

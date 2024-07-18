@@ -19,6 +19,7 @@ public class CreateWarehouseSizeCommandHandler : IRequestHandler<CreateWarehouse
     public async Task<ErrorOr<WarehouseSize>> Handle(CreateWarehouseSizeCommand request, CancellationToken cancellationToken)
     {
         var warehouseSize = new WarehouseSize(
+            request.Name,
             sectorNumber: request.SectorNumber,
             rackQuantity: request.RackQuantity);
 

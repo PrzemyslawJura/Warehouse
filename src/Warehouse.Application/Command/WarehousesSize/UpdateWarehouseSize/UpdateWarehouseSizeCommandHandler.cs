@@ -19,6 +19,7 @@ public class UpdateWarehouseSizeCommandHandler : IRequestHandler<UpdateWarehouse
     {
         var worker = new WarehouseSize(
             id: request.Id,
+            name: request.Name,
             sectorNumber: request.SectorNumber,
             rackQuantity: request.RackQuantity);
 

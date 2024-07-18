@@ -124,7 +124,7 @@ public class AdministratorController : ApiController
     public async Task<IActionResult> CreateWarehouseSize(
         CreateWarehouseSizeRequest request)
     {
-        var command = new CreateWarehouseSizeCommand(request.SectorNumber, request.RackQuantity);
+        var command = new CreateWarehouseSizeCommand(request.Name, request.SectorNumber, request.RackQuantity);
 
         var createWarehouseSizeResult = await _mediator.Send(command);
 
@@ -134,6 +134,7 @@ public class AdministratorController : ApiController
                 new { WarehouseSizeId = warehouseSize.Id },
                 new WarehouseSizeResponse(
                     warehouseSize.Id,
+                    warehouseSize.Name,
                     warehouseSize.SectorNumber,
                     warehouseSize.RackQuantity)),
             Problem);
@@ -149,6 +150,7 @@ public class AdministratorController : ApiController
         return getWarehouseSizeResult.Match(
             warehouseSize => Ok(new WarehouseSizeResponse(
                 warehouseSize.Id,
+                warehouseSize.Name,
                 warehouseSize.SectorNumber,
                 warehouseSize.RackQuantity)),
             Problem);
@@ -164,6 +166,7 @@ public class AdministratorController : ApiController
         return listWarehouseSizesResult.Match(
             warehouseSizes => Ok(warehouseSizes.ConvertAll(warehouseSize => new WarehouseSizeResponse(
                 warehouseSize.Id,
+                warehouseSize.Name,
                 warehouseSize.SectorNumber,
                 warehouseSize.RackQuantity))),
             Problem);
@@ -173,13 +176,14 @@ public class AdministratorController : ApiController
     public async Task<IActionResult> UpdateWarehouseSize(UpdateWarehouseSizeRequest request)
     {
 
-        var command = new UpdateWarehouseSizeCommand(request.Id, request.SectorNumber, request.RackQuantity);
+        var command = new UpdateWarehouseSizeCommand(request.Id, request.Name, request.SectorNumber, request.RackQuantity);
 
         var updateWarehouseSizeResult = await _mediator.Send(command);
 
         return updateWarehouseSizeResult.Match(
                 warehouseSize => Ok(new WarehouseSizeResponse(
                     warehouseSize.Id,
+                    warehouseSize.Name,
                     warehouseSize.SectorNumber,
                     warehouseSize.RackQuantity)),
             Problem);

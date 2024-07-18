@@ -1,2 +1,2 @@
 ﻿namespace Warehouse.Contracts.WarehousesSize;
-public record WarehouseSizeResponse(Guid Id, int SectorNumber, int RackQuantity);
+public record WarehouseSizeResponse(Guid Id, string Name, int SectorNumber, int RackQuantity);

@@ -1,2 +1,2 @@
 ﻿namespace Warehouse.Contracts.WarehousesSize;
-public record CreateWarehouseSizeRequest(int SectorNumber, int RackQuantity);
+public record CreateWarehouseSizeRequest(string Name, int SectorNumber, int RackQuantity);

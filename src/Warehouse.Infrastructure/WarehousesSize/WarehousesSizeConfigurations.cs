@@ -11,5 +11,8 @@ public class WarehouseSizeConfigurations : IEntityTypeConfiguration<WarehouseSiz
 
         builder.Property(x => x.Id)
             .ValueGeneratedNever();
+
+        builder.Property(x => x.Name)
+            .HasMaxLength(50);
     }
 }
