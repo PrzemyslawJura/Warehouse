@@ -1,11 +1,9 @@
-//using BookYourVisit.Application;
-using BookYourVisit.Infrastructure;
 using System.Text.Json.Serialization;
+using Warehouse.Application;
+using Warehouse.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -16,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddProblemDetails();
 
 builder.Services
-// .AddApplication()
+    .AddApplication()
     .AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
