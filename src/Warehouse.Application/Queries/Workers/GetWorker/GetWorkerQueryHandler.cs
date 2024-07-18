@@ -15,7 +15,7 @@ public class GetWorkerQueryHandler : IRequestHandler<GetWorkerQuery, ErrorOr<Wor
 
     public async Task<ErrorOr<Worker>> Handle(GetWorkerQuery query, CancellationToken cancellationToken)
     {
-        var worker = await _workersRepository.GetByIdAsync(query.WorkerId);
+        var worker = await _workersRepository.GetByIdAsync(query.Id);
 
         return worker is null
             ? Error.NotFound(description: "Worker not found")

@@ -19,7 +19,7 @@ public class TransactionsRepository : ITransactionsRepository
 
     public async Task<Transaction?> GetByIdAsync(Guid id)
     {
-        return await _dbContext.Transactions.FirstOrDefaultAsync(transaction => transaction.Id == id);
+        return await _dbContext.Transactions.FindAsync(id);
     }
 
     public async Task<List<Transaction>> ListAsync()

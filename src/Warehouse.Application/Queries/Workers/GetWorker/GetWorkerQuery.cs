@@ -3,5 +3,5 @@ using MediatR;
 using Warehouse.Domain.Workers;
 
 namespace Warehouse.Application.Queries.Workers.GetWorker;
-public record GetWorkerQuery(Guid WorkerId)
+public record GetWorkerQuery(Guid Id)
     : IRequest<ErrorOr<Worker>>;

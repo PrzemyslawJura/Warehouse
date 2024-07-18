@@ -19,7 +19,7 @@ public class WorkersRepository : IWorkersRepository
 
     public async Task<Worker?> GetByIdAsync(Guid id)
     {
-        return await _dbContext.Workers.FirstOrDefaultAsync(Worker => Worker.Id == id);
+        return await _dbContext.Workers.FindAsync(id);
     }
 
     public async Task<List<Worker>> ListAsync()

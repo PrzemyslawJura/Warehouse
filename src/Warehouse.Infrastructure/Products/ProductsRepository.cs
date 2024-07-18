@@ -20,7 +20,7 @@ public class ProductsRepository : IProductsRepository
 
     public async Task<Product?> GetByIdAsync(Guid id)
     {
-        return await _dbContext.Products.FirstOrDefaultAsync(product => product.Id == id);
+        return await _dbContext.Products.FindAsync(id);
     }
 
     public async Task<List<Product>> ListAsync()

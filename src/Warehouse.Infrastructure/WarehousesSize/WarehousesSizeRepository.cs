@@ -19,7 +19,7 @@ public class WarehousesSizeRepository : IWarehousesSizeRepository
 
     public async Task<WarehouseSize?> GetByIdAsync(Guid id)
     {
-        return await _dbContext.WarehousesSize.FirstOrDefaultAsync(WarehouseSize => WarehouseSize.Id == id);
+        return await _dbContext.WarehousesSize.FindAsync(id);
     }
 
     public async Task<List<WarehouseSize>> ListAsync()

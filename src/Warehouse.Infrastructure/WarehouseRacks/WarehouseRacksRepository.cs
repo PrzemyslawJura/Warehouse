@@ -19,7 +19,7 @@ public class WarehouseRacksRepository : IWarehouseRacksRepository
 
     public async Task<WarehouseRack?> GetByIdAsync(Guid id)
     {
-        return await _dbContext.WarehouseRacks.FirstOrDefaultAsync(WarehouseRack => WarehouseRack.Id == id);
+        return await _dbContext.WarehouseRacks.FindAsync(id);
     }
 
     public async Task<List<WarehouseRack>> ListAsync()

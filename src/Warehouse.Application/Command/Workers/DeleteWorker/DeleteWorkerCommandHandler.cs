@@ -18,14 +18,14 @@ public class DeleteWorkerCommandHandler : IRequestHandler<DeleteWorkerCommand, E
 
     public async Task<ErrorOr<Deleted>> Handle(DeleteWorkerCommand command, CancellationToken cancellationToken)
     {
-        var message = await _workersRepository.GetByIdAsync(command.Id);
+        var worker = await _workersRepository.GetByIdAsync(command.Id);
 
-        if (message is null)
+        if (worker is null)
         {
             return Error.NotFound(description: "Worker not found");
         }
 
-        await _workersRepository.RemoveWorkerAsync(message);
+        await _workersRepository.RemoveWorkerAsync(worker);
         await _unitOfWork.CommitChangesAsync();
 
         return Result.Deleted;
