@@ -1,15 +1,21 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Warehouse.Application.Command.Products.CreateProduct;
+using Warehouse.Application.Command.Products.DeleteProduct;
+using Warehouse.Application.Command.Products.UpdateProduct;
 using Warehouse.Application.Command.WarehousesSize.CreateWarehouseSize;
 using Warehouse.Application.Command.WarehousesSize.DeleteWarehouseSize;
 using Warehouse.Application.Command.WarehousesSize.UpdateWarehouseSize;
 using Warehouse.Application.Command.Workers.CreateWorkerCommand;
 using Warehouse.Application.Command.Workers.DeleteWorker;
 using Warehouse.Application.Command.Workers.UpdateWorker;
+using Warehouse.Application.Queries.Products.GetProduct;
+using Warehouse.Application.Queries.Products.ListProducts;
 using Warehouse.Application.Queries.WarehousesSize.GetWarehouseSize;
 using Warehouse.Application.Queries.WarehousesSize.ListWarehousesSize;
 using Warehouse.Application.Queries.Workers.GetWorker;
 using Warehouse.Application.Queries.Workers.ListWorkers;
+using Warehouse.Contracts.Products;
 using Warehouse.Contracts.WarehousesSize;
 using Warehouse.Contracts.Workers;
 
@@ -199,5 +205,108 @@ public class AdministratorController : ApiController
         return deleteWarehouseSizeResult.Match(
             _ => NoContent(),
             Problem);
+    }
+
+
+
+    [HttpPost("Product")]
+    public async Task<IActionResult> CreateProduct(
+    CreateProductRequest request)
+    {
+        var _ProductType = ToDto(request.Type);
+
+        var command = new CreateProductCommand(
+                            request.Name,
+                            _ProductType,
+                            request.Description);
+
+        var createProductResult = await _mediator.Send(command);
+
+        return createProductResult.Match(
+            Product => CreatedAtAction(
+                nameof(GetProduct),
+                new { ProductId = Product.Id },
+                new ProductResponse(
+                    Product.Id,
+                    Product.Name,
+                    Product.Type.ToString(),
+                    Product.Description)),
+            Problem);
+    }
+
+    [HttpGet("Product{ProductId:guid}")]
+    public async Task<IActionResult> GetProduct(Guid ProductId)
+    {
+        var query = new GetProductQuery(ProductId);
+
+        var getProductResult = await _mediator.Send(query);
+
+        return getProductResult.Match(
+            Product => Ok(new ProductResponse(
+                Product.Id,
+                Product.Name,
+                Product.Type.ToString(),
+                Product.Description)),
+            Problem);
+    }
+
+    [HttpGet("Products")]
+    public async Task<IActionResult> ListProducts()
+    {
+        var command = new ListProductsQuery();
+
+        var listProductsResult = await _mediator.Send(command);
+
+        return listProductsResult.Match(
+            Products => Ok(Products.ConvertAll(Product => new ProductResponse(
+                Product.Id,
+                Product.Name,
+                Product.Type.ToString(),
+                Product.Description))),
+            Problem);
+    }
+
+    [HttpPut("Products")]
+    public async Task<IActionResult> UpdateProduct(UpdateProductRequest request)
+    {
+        var _ProductType = ToDto(request.Type);
+
+        var command = new UpdateProductCommand(
+                            request.Id,
+                            request.Name,
+                            _ProductType,
+                            request.Description);
+
+        var updateProductResult = await _mediator.Send(command);
+
+        return updateProductResult.Match(
+                Product => Ok(new ProductResponse(
+                    Product.Id,
+                    Product.Name,
+                    Product.Type.ToString(),
+                    Product.Description)),
+            Problem);
+    }
+
+    [HttpDelete("Product{ProductId:guid}")]
+    public async Task<IActionResult> DeleteProduct(Guid ProductId)
+    {
+        var command = new DeleteProductCommand(ProductId);
+
+        var deleteProductResult = await _mediator.Send(command);
+
+        return deleteProductResult.Match(
+            _ => NoContent(),
+            Problem);
+    }
+    private static Domain.Products.ProductType ToDto(Contracts.Products.ProductType ProductType)
+    {
+        return ProductType switch
+        {
+            Contracts.Products.ProductType.One => Domain.Products.ProductType.One,
+            Contracts.Products.ProductType.Two => Domain.Products.ProductType.Two,
+            Contracts.Products.ProductType.Three => Domain.Products.ProductType.Three,
+            _ => throw new InvalidOperationException(),
+        };
     }
 }
