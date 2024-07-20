@@ -8,7 +8,7 @@ public class WarehouseSize
     public int SectorNumber { get; set; }
     public int RackQuantity { get; set; }
 
-    public ICollection<WarehouseRack>? WarehousesRack { get; private set; }
+    public ICollection<WarehouseRack>? WarehouseRacks { get; private set; }
 
     public WarehouseSize(
         string name,

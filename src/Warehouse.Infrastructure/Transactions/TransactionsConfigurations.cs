@@ -19,7 +19,7 @@ public class TransactionConfigurations : IEntityTypeConfiguration<Transaction>
               .WithMany(x => x.Transactions)
               .HasForeignKey(x => x.ProductId);
 
-        builder.HasOne(x => x.WarehousesRack)
+        builder.HasOne(x => x.WarehouseRacks)
             .WithMany(x => x.Transactions)
             .HasForeignKey(x => x.WarehouseRackId);
 

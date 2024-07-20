@@ -21,7 +21,7 @@ public class TransactionsRepository : ITransactionsRepository
     {
         return await _dbContext.Transactions
             .Include(transaction => transaction.Products)
-            .Include(transaction => transaction.WarehousesRack)
+            .Include(transaction => transaction.WarehouseRacks)
                 .ThenInclude(transaction => transaction.WarehousesSize)
             .Include(transaction => transaction.Workers)
             .FirstOrDefaultAsync(transaction => transaction.Id == id);
@@ -31,7 +31,7 @@ public class TransactionsRepository : ITransactionsRepository
     {
         return await _dbContext.Transactions
             .Include(transaction => transaction.Products)
-            .Include(transaction => transaction.WarehousesRack)
+            .Include(transaction => transaction.WarehouseRacks)
                  .ThenInclude(transaction => transaction.WarehousesSize)
             .Include(transaction => transaction.Workers)
             .ToListAsync();

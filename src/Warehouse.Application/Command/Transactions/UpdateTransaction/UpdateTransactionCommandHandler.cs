@@ -36,8 +36,8 @@ public class UpdateTransactionCommandHandler : IRequestHandler<UpdateTransaction
             warehouseRackId: warehouseRack.Id,
             workerId: request.WorkerId);
 
-        await _warehouseRacksRepository.UpdateWarehouseRackAsync(warehouseRack);
         await _transactionsRepository.UpdateTransactionAsync(transaction);
+        await _warehouseRacksRepository.UpdateWarehouseRackAsync(warehouseRack);
         await _unitOfWork.CommitChangesAsync();
 
         return transaction;

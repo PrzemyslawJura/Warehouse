@@ -25,7 +25,7 @@ public class DeleteTransactionCommandHandler : IRequestHandler<DeleteTransaction
             return Error.NotFound(description: "Transaction not found");
         }
 
-        var warehouseRack = await _warehouseRacksRepository.GetByIdAsync(command.Id);
+        var warehouseRack = await _warehouseRacksRepository.GetByIdAsync(transaction.WarehouseRackId);
 
         if (warehouseRack is null)
         {

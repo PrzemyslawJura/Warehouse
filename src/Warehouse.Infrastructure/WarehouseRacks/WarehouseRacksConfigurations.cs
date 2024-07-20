@@ -13,7 +13,7 @@ public class WarehouseRackConfigurations : IEntityTypeConfiguration<WarehouseRac
             .ValueGeneratedNever();
 
         builder.HasOne(x => x.WarehousesSize)
-            .WithMany(x => x.WarehousesRack)
+            .WithMany(x => x.WarehouseRacks)
             .HasForeignKey(x => x.WarehouseSizeId);
     }
 }

@@ -1,5 +1,5 @@
 ﻿namespace Warehouse.Contracts.Transactions;
-public record TransactionResponse(
+public record QueryTransactionResponse(
     Guid TransactionId,
     string ProductName,
     string ProductType,

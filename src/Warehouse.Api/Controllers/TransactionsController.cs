@@ -19,7 +19,7 @@ public class TransactionsController : ApiController
         _mediator = mediator;
     }
 
-    [HttpPost("Transaction")]
+    [HttpPost]
     public async Task<IActionResult> CreateTransaction(
        CreateTransactionRequest request)
     {
@@ -38,24 +38,17 @@ public class TransactionsController : ApiController
         var createTransactionResult = await _mediator.Send(command);
 
         return createTransactionResult.Match(
-            Transaction => CreatedAtAction(
+            transaction => CreatedAtAction(
                 nameof(GetTransaction),
-                new { TransactionId = Transaction.Id },
-                new TransactionResponse(
-                    Transaction.Id,
-                    Transaction.Products.Name,
-                    Transaction.Products.Type.ToString(),
-                    Transaction.Products.Id,
-                    Transaction.Quantity,
-                    Transaction.Type.ToString(),
-                    Transaction.Date,
-                    Transaction.WarehousesRack.WarehousesSize.Name,
-                    Transaction.WarehousesRack.Sector,
-                    Transaction.WarehousesRack.Rack,
-                    Transaction.Workers.FirstName,
-                    Transaction.Workers.LastName,
-                    Transaction.Workers.Role.ToString(),
-                    Transaction.Workers.Id)),
+                new { TransactionId = transaction.Id },
+                new CommandTransactionResponse(
+                    transaction.Id,
+                    transaction.ProductId,
+                    transaction.Quantity,
+                    transaction.Type.ToString(),
+                    transaction.Date,
+                    transaction.WarehouseRackId,
+                    transaction.WorkerId)),
             Problem);
     }
 
@@ -67,25 +60,25 @@ public class TransactionsController : ApiController
         var getTransactionResult = await _mediator.Send(query);
 
         return getTransactionResult.Match(
-            Transaction => Ok(new TransactionResponse(
-                Transaction.Id,
-                Transaction.Products.Name,
-                Transaction.Products.Type.ToString(),
-                Transaction.Products.Id,
-                Transaction.Quantity,
-                Transaction.Type.ToString(),
-                Transaction.Date,
-                Transaction.WarehousesRack.WarehousesSize.Name,
-                Transaction.WarehousesRack.Sector,
-                Transaction.WarehousesRack.Rack,
-                Transaction.Workers.FirstName,
-                Transaction.Workers.LastName,
-                Transaction.Workers.Role.ToString(),
-                Transaction.Workers.Id)),
+            transaction => Ok(new QueryTransactionResponse(
+                    transaction.Id,
+                    transaction.Products.Name,
+                    transaction.Products.Type.ToString(),
+                    transaction.Products.Id,
+                    transaction.Quantity,
+                    transaction.Type.ToString(),
+                    transaction.Date,
+                    transaction.WarehouseRacks.WarehousesSize.Name,
+                    transaction.WarehouseRacks.Sector,
+                    transaction.WarehouseRacks.Rack,
+                    transaction.Workers.FirstName,
+                    transaction.Workers.LastName,
+                    transaction.Workers.Role.ToString(),
+                    transaction.Workers.Id)),
             Problem);
     }
 
-    [HttpGet("Transactions")]
+    [HttpGet]
     public async Task<IActionResult> ListTransactions()
     {
         var command = new ListTransactionsQuery();
@@ -93,25 +86,25 @@ public class TransactionsController : ApiController
         var listTransactionsResult = await _mediator.Send(command);
 
         return listTransactionsResult.Match(
-            Transactions => Ok(Transactions.ConvertAll(Transaction => new TransactionResponse(
-                Transaction.Id,
-                Transaction.Products.Name,
-                Transaction.Products.Type.ToString(),
-                Transaction.Products.Id,
-                Transaction.Quantity,
-                Transaction.Type.ToString(),
-                Transaction.Date,
-                Transaction.WarehousesRack.WarehousesSize.Name,
-                Transaction.WarehousesRack.Sector,
-                Transaction.WarehousesRack.Rack,
-                Transaction.Workers.FirstName,
-                Transaction.Workers.LastName,
-                Transaction.Workers.Role.ToString(),
-                Transaction.Workers.Id))),
+            transactions => Ok(transactions.ConvertAll(transaction => new QueryTransactionResponse(
+                    transaction.Id,
+                    transaction.Products.Name,
+                    transaction.Products.Type.ToString(),
+                    transaction.Products.Id,
+                    transaction.Quantity,
+                    transaction.Type.ToString(),
+                    transaction.Date,
+                    transaction.WarehouseRacks.WarehousesSize.Name,
+                    transaction.WarehouseRacks.Sector,
+                    transaction.WarehouseRacks.Rack,
+                    transaction.Workers.FirstName,
+                    transaction.Workers.LastName,
+                    transaction.Workers.Role.ToString(),
+                    transaction.Workers.Id))),
             Problem);
     }
 
-    [HttpPut("Transaction")]
+    [HttpPut]
     public async Task<IActionResult> UpdateTransaction(UpdateTransactionRequest request)
     {
         var _transactionType = ToDto(request.TransactionType);
@@ -131,21 +124,14 @@ public class TransactionsController : ApiController
         var updateTransactionResult = await _mediator.Send(command);
 
         return updateTransactionResult.Match(
-                Transaction => Ok(new TransactionResponse(
-                    Transaction.Id,
-                    Transaction.Products.Name,
-                    Transaction.Products.Type.ToString(),
-                    Transaction.Products.Id,
-                    Transaction.Quantity,
-                    Transaction.Type.ToString(),
-                    Transaction.Date,
-                    Transaction.WarehousesRack.WarehousesSize.Name,
-                    Transaction.WarehousesRack.Sector,
-                    Transaction.WarehousesRack.Rack,
-                    Transaction.Workers.FirstName,
-                    Transaction.Workers.LastName,
-                    Transaction.Workers.Role.ToString(),
-                    Transaction.Workers.Id)),
+                transaction => Ok(new CommandTransactionResponse(
+                    transaction.Id,
+                    transaction.ProductId,
+                    transaction.Quantity,
+                    transaction.Type.ToString(),
+                    transaction.Date,
+                    transaction.WarehouseRackId,
+                    transaction.WorkerId)),
             Problem);
     }
 

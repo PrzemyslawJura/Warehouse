@@ -11,7 +11,7 @@ public class Transaction
     public DateTime Date { get; set; }
 
     public Product Products { get; set; }
-    public WarehouseRack WarehousesRack { get; set; }
+    public WarehouseRack WarehouseRacks { get; set; }
     public Worker Workers { get; set; }
 
     public Guid ProductId { get; set; }
