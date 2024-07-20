@@ -89,13 +89,11 @@ namespace Warehouse.Infrastructure.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Rack")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Rack")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Sector")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Sector")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("WarehouseSizeId")
                         .HasColumnType("uniqueidentifier");

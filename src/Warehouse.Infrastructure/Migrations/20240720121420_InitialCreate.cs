@@ -58,8 +58,8 @@ namespace Warehouse.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Sector = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rack = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sector = table.Column<int>(type: "int", nullable: false),
+                    Rack = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     WarehouseSizeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },

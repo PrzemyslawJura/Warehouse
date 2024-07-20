@@ -19,12 +19,22 @@ public class TransactionsRepository : ITransactionsRepository
 
     public async Task<Transaction?> GetByIdAsync(Guid id)
     {
-        return await _dbContext.Transactions.FindAsync(id);
+        return await _dbContext.Transactions
+            .Include(transaction => transaction.Products)
+            .Include(transaction => transaction.WarehousesRack)
+                .ThenInclude(transaction => transaction.WarehousesSize)
+            .Include(transaction => transaction.Workers)
+            .FirstOrDefaultAsync(transaction => transaction.Id == id);
     }
 
     public async Task<List<Transaction>> ListAsync()
     {
-        return await _dbContext.Transactions.ToListAsync();
+        return await _dbContext.Transactions
+            .Include(transaction => transaction.Products)
+            .Include(transaction => transaction.WarehousesRack)
+                 .ThenInclude(transaction => transaction.WarehousesSize)
+            .Include(transaction => transaction.Workers)
+            .ToListAsync();
     }
 
     public Task RemoveTransactionAsync(Transaction transaction)

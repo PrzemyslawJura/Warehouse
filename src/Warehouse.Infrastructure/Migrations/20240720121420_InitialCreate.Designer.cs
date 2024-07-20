@@ -12,7 +12,7 @@ using Warehouse.Infrastructure.Common;
 namespace Warehouse.Infrastructure.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    [Migration("20240718133930_InitialCreate")]
+    [Migration("20240720121420_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -92,13 +92,11 @@ namespace Warehouse.Infrastructure.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Rack")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Rack")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Sector")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Sector")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("WarehouseSizeId")
                         .HasColumnType("uniqueidentifier");

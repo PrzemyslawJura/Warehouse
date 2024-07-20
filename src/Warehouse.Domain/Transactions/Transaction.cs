@@ -23,12 +23,18 @@ public class Transaction
         int quantity,
         TransactionType type,
         DateTime date,
+        Guid productId,
+        Guid warehouseRackId,
+        Guid workerId,
         Guid? id = null)
     {
         Id = id ?? Guid.NewGuid();
         Quantity = quantity;
         Type = type;
         Date = date;
+        ProductId = productId;
+        WarehouseRackId = warehouseRackId;
+        WorkerId = workerId;
     }
 
     public Transaction() { }

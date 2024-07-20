@@ -3,7 +3,7 @@ using MediatR;
 using Warehouse.Application.Common;
 using Warehouse.Domain.Workers;
 
-namespace Warehouse.Application.Command.Workers.CreateWorkerCommand;
+namespace Warehouse.Application.Command.Workers.CreateWorker;
 public class CreateWorkerCommandHandler : IRequestHandler<CreateWorkerCommand, ErrorOr<Worker>>
 {
     private readonly IWorkersRepository _workersRepository;

@@ -6,7 +6,7 @@ using Warehouse.Application.Command.Products.UpdateProduct;
 using Warehouse.Application.Command.WarehousesSize.CreateWarehouseSize;
 using Warehouse.Application.Command.WarehousesSize.DeleteWarehouseSize;
 using Warehouse.Application.Command.WarehousesSize.UpdateWarehouseSize;
-using Warehouse.Application.Command.Workers.CreateWorkerCommand;
+using Warehouse.Application.Command.Workers.CreateWorker;
 using Warehouse.Application.Command.Workers.DeleteWorker;
 using Warehouse.Application.Command.Workers.UpdateWorker;
 using Warehouse.Application.Queries.Products.GetProduct;
