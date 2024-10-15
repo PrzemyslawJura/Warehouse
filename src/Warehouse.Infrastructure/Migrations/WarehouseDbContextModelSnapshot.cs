@@ -158,7 +158,7 @@ namespace Warehouse.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Warehouse.Domain.Warehouses.WarehouseRack", "WarehousesRack")
+                    b.HasOne("Warehouse.Domain.Warehouses.WarehouseRack", "WarehouseRacks")
                         .WithMany("Transactions")
                         .HasForeignKey("WarehouseRackId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -172,7 +172,7 @@ namespace Warehouse.Infrastructure.Migrations
 
                     b.Navigation("Products");
 
-                    b.Navigation("WarehousesRack");
+                    b.Navigation("WarehouseRacks");
 
                     b.Navigation("Workers");
                 });
@@ -180,7 +180,7 @@ namespace Warehouse.Infrastructure.Migrations
             modelBuilder.Entity("Warehouse.Domain.Warehouses.WarehouseRack", b =>
                 {
                     b.HasOne("Warehouse.Domain.WarehousesSize.WarehouseSize", "WarehousesSize")
-                        .WithMany("WarehousesRack")
+                        .WithMany("WarehouseRacks")
                         .HasForeignKey("WarehouseSizeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -200,7 +200,7 @@ namespace Warehouse.Infrastructure.Migrations
 
             modelBuilder.Entity("Warehouse.Domain.WarehousesSize.WarehouseSize", b =>
                 {
-                    b.Navigation("WarehousesRack");
+                    b.Navigation("WarehouseRacks");
                 });
 
             modelBuilder.Entity("Warehouse.Domain.Workers.Worker", b =>
